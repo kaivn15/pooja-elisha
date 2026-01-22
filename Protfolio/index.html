@@ -31,11 +31,17 @@
             color: var(--dark-color);
             line-height: 1.6;
             background-color: #f9f9f9;
+            padding-top: 70px; /* Account for fixed navbar */
         }
         
         h1, h2, h3, h4, h5 {
             font-family: 'Montserrat', sans-serif;
             font-weight: 700;
+        }
+        
+        .navbar {
+            padding: 15px 0;
+            transition: all 0.3s ease;
         }
         
         .navbar-brand {
@@ -45,12 +51,23 @@
             color: var(--primary-color) !important;
         }
         
+        .navbar-nav .nav-link {
+            font-weight: 500;
+            margin: 0 5px;
+            color: var(--dark-color) !important;
+        }
+        
+        .navbar-nav .nav-link:hover {
+            color: var(--primary-color) !important;
+        }
+        
         .hero-section {
             background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
             color: white;
-            padding: 100px 0;
+            padding: 100px 0 80px;
             position: relative;
             overflow: hidden;
+            margin-top: -70px; /* Offset the body padding */
         }
         
         .hero-section::before {
@@ -64,6 +81,12 @@
             background-size: 100% 100px;
             background-position: bottom;
             background-repeat: no-repeat;
+        }
+        
+        .profile-img-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         
         .profile-img {
@@ -92,6 +115,11 @@
             border-radius: 2px;
         }
         
+        .section-title.text-center::after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
         .skill-card {
             background: white;
             border-radius: 10px;
@@ -100,6 +128,7 @@
             height: 100%;
             transition: transform 0.3s ease;
             border-top: 4px solid var(--primary-color);
+            margin-bottom: 30px;
         }
         
         .skill-card:hover {
@@ -118,6 +147,7 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
             transition: transform 0.3s ease;
             height: 100%;
+            margin-bottom: 30px;
         }
         
         .project-card:hover {
@@ -136,12 +166,15 @@
             padding: 25px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
             height: 100%;
+            margin-bottom: 30px;
         }
         
         .contact-icon {
             font-size: 1.5rem;
             color: var(--primary-color);
             margin-right: 10px;
+            width: 30px;
+            text-align: center;
         }
         
         .social-icon {
@@ -164,15 +197,6 @@
             text-decoration: none;
         }
         
-        .progress {
-            height: 10px;
-            margin-bottom: 15px;
-        }
-        
-        .progress-bar {
-            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
-        }
-        
         .badge-custom {
             background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
             color: white;
@@ -180,6 +204,8 @@
             border-radius: 30px;
             font-weight: 500;
             margin: 5px;
+            display: inline-block;
+            font-size: 0.85rem;
         }
         
         footer {
@@ -188,10 +214,31 @@
             padding: 30px 0;
         }
         
+        /* Responsive adjustments */
+        @media (max-width: 992px) {
+            .hero-section {
+                padding: 80px 0 60px;
+                text-align: center;
+            }
+            
+            .profile-img {
+                width: 200px;
+                height: 200px;
+                margin-top: 20px;
+            }
+            
+            h1.display-4 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-section h2 {
+                font-size: 1.5rem;
+            }
+        }
+        
         @media (max-width: 768px) {
             .hero-section {
-                padding: 60px 0;
-                text-align: center;
+                padding: 60px 0 40px;
             }
             
             .profile-img {
@@ -199,6 +246,65 @@
                 height: 180px;
                 margin-bottom: 20px;
             }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .skill-card, .project-card, .contact-info {
+                padding: 20px;
+            }
+            
+            .btn-lg {
+                padding: 10px 20px;
+                font-size: 1rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .navbar-brand {
+                font-size: 1.5rem;
+            }
+            
+            .hero-section {
+                padding: 50px 0 30px;
+            }
+            
+            h1.display-4 {
+                font-size: 2rem;
+            }
+            
+            .profile-img {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .badge-custom {
+                padding: 6px 12px;
+                font-size: 0.8rem;
+                margin: 3px;
+            }
+            
+            .section-title {
+                font-size: 1.6rem;
+            }
+            
+            .contact-icon {
+                font-size: 1.2rem;
+                margin-right: 8px;
+                width: 25px;
+            }
+        }
+        
+        /* Fix for extra padding on mobile */
+        .container-fluid {
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+        
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
         }
     </style>
 </head>
@@ -207,7 +313,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
         <div class="container">
             <a class="navbar-brand" href="#">Pooja Elisha</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -243,13 +349,13 @@
                     <h1 class="display-4 fw-bold mb-3">Pooja Elisha</h1>
                     <h2 class="mb-4">Social Media Marketing Manager & Digital Content Creator</h2>
                     <p class="lead mb-4">Creative professional with expertise in social media strategy, content creation, and digital marketing. Combining technical skills with creative vision to deliver engaging campaigns that drive results.</p>
-                    <a href="#contact" class="btn btn-light btn-lg px-4 me-2">Contact Me</a>
+                    <a href="#contact" class="btn btn-light btn-lg px-4 me-2 mb-2 mb-md-0">Contact Me</a>
                     <a href="#projects" class="btn btn-outline-light btn-lg px-4">View Projects</a>
                 </div>
                 <div class="col-lg-4 text-center">
                     <img src="image/pooja.png" alt="Pooja Elisha" 
-                    class="rounded-circle mb-4" 
-                    style="width:350px;height:350px;object-fit:cover;border:8px solid #fff;">
+                    class="profile-img" 
+                    style="object-fit:cover;">
                 </div>
             </div>
         </div>
@@ -309,18 +415,19 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <h2 class="section-title">Skills & Expertise</h2>
+                    <h2 class="section-title text-center">Skills & Expertise</h2>
                 </div>
             </div>
             
             <div class="row mt-4">
-                <div class="col-md-10 mb-10">
+                <!-- Fixed the column classes for proper responsiveness -->
+                <div class="col-lg-4 col-md-6 mb-4">
                     <div class="skill-card">
-                        <div class="skill-icon">
+                        <div class="skill-icon text-center">
                             <i class="fas fa-paint-brush"></i>
                         </div>
-                        <h4>Editing & Design Tools</h4>
-                        <div class="mt-3">
+                        <h4 class="text-center">Editing & Design Tools</h4>
+                        <div class="mt-3 text-center">
                             <span class="badge-custom">Canva</span>
                             <span class="badge-custom">CapCut</span>
                             <span class="badge-custom">Blender</span>
@@ -328,46 +435,46 @@
                             <span class="badge-custom">Adobe Premiere Pro</span>
                             <span class="badge-custom">Figma</span>
                         </div>
-                        <p class="mt-3">Expertise in creating visually appealing graphics, videos, and animations for social media campaigns.</p>
+                        <p class="mt-3 text-center">Expertise in creating visually appealing graphics, videos, and animations for social media campaigns.</p>
                     </div>
                 </div>
                 
-                <div class="col-md-10 mb-10">
+                <div class="col-lg-4 col-md-6 mb-4">
                     <div class="skill-card">
-                        <div class="skill-icon">
+                        <div class="skill-icon text-center">
                             <i class="fas fa-chart-line"></i>
                         </div>
-                        <h4>Social Media Marketing</h4>
-                        <div class="mt-3">
+                        <h4 class="text-center">Social Media Marketing</h4>
+                        <div class="mt-3 text-center">
                             <span class="badge-custom">Content Strategy</span>
                             <span class="badge-custom">Audience Engagement</span>
                             <span class="badge-custom">Analytics & Insights</span>
                         </div>
-                        <p class="mt-3">Developing and executing social media strategies to increase brand awareness and drive engagement.</p>
+                        <p class="mt-3 text-center">Developing and executing social media strategies to increase brand awareness and drive engagement.</p>
                     </div>
                 </div>
                 
-                <div class="col-md-10 mb-10">
+                <div class="col-lg-4 col-md-6 mb-4">
                     <div class="skill-card">
-                        <div class="skill-icon">
+                        <div class="skill-icon text-center">
                             <i class="fas fa-code"></i>
                         </div>
-                        <h4>Technical Skills</h4>
-                        <div class="mt-3">
+                        <h4 class="text-center">Technical Skills</h4>
+                        <div class="mt-3 text-center">
                             <span class="badge-custom">HTML/CSS</span>
                             <span class="badge-custom">Python</span>
                             <span class="badge-custom">Arduino IDE</span>
                             <span class="badge-custom">MS Office</span>
                             <span class="badge-custom">Embedded Systems</span>
                         </div>
-                        <p class="mt-3">Strong technical background enabling innovative approaches to digital marketing challenges.</p>
+                        <p class="mt-3 text-center">Strong technical background enabling innovative approaches to digital marketing challenges.</p>
                     </div>
                 </div>
             </div>
             
             <div class="row mt-2">
                 <div class="col-md-12">
-                    <h4 class="mt-5 mb-3">Soft Skills</h4>
+                    <h4 class="mt-5 mb-3 text-center">Soft Skills</h4>
                     <div class="row">
                         <div class="col-md-3 col-6 mb-3">
                             <div class="text-center">
@@ -404,12 +511,12 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <h2 class="section-title">Projects & Experience</h2>
+                    <h2 class="section-title text-center">Projects & Experience</h2>
                 </div>
             </div>
             
             <div class="row mt-4">
-                <div class="col-lg-6 mb-4">
+                <div class="col-lg-6 col-md-6 mb-4">
                     <div class="project-card">
                         <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="project-img" alt="Stroke Rehabilitation Project">
                         <div class="p-4">
@@ -426,7 +533,7 @@
                     </div>
                 </div>
                 
-                <div class="col-lg-6 mb-4">
+                <div class="col-lg-6 col-md-6 mb-4">
                     <div class="project-card">
                         <img src="https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="project-img" alt="Social Media Campaign">
                         <div class="p-4">
@@ -451,31 +558,34 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <h2 class="section-title">Professional Experience</h2>
+                    <h2 class="section-title text-center">Professional Experience</h2>
                 </div>
             </div>
             
             <div class="row mt-4">
-                <div class="col-lg-6 mb-4">
+                <div class="col-lg-6 col-md-6 mb-4">
                     <div class="card h-100">
                         <div class="card-body">
                             <h4 class="card-title">Canva Poster Design</h4>
                             <p class="text-muted">Personal Interest</p>
                             <ul>
                                 <li>Created posters</li>
-                                <li>used template and create invitations</li>
+                                <li>Used templates to create invitations</li>
+                                <li>Designed social media graphics for personal projects</li>
                             </ul>
                         </div>
                     </div>
                 </div>
                 
-                <div class="col-lg-6 mb-4">
+                <div class="col-lg-6 col-md-6 mb-4">
                     <div class="card h-100">
                         <div class="card-body">
                             <h4 class="card-title">Blender Animator</h4>
                             <p class="text-muted">Personal Interest</p>
                             <ul>
-                                <li>Created 3D animations </li>
+                                <li>Created 3D animations</li>
+                                <li>Learned basic 3D modeling and texturing</li>
+                                <li>Explored motion graphics for video content</li>
                             </ul>
                         </div>
                     </div>
@@ -490,7 +600,7 @@
                             <ul>
                                 <li>Managed social media account with 10,000+ followers</li>
                                 <li>Increased engagement rate by 60% through strategic content planning</li>
-                                <li>Created multimedia content including  videos</li>
+                                <li>Created multimedia content including videos</li>
                                 <li>Analyzed performance metrics to optimize content strategy</li>
                             </ul>
                         </div>
@@ -501,116 +611,117 @@
     </section>
 
     <!-- Contact Section -->
-   <section id="contact" class="py-5 bg-light">
-    <div class="container">
-    
-    <div class="row text-center">
-      <div class="col-12">
-        <h2 class="section-title">Get In Touch</h2>
-        <p class="text-muted">Feel free to contact me for job opportunities, collaborations, or queries.</p>
-      </div>
-    </div>
+    <section id="contact" class="py-5">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-12">
+                    <h2 class="section-title">Get In Touch</h2>
+                    <p class="text-muted mb-5">Feel free to contact me for job opportunities, collaborations, or queries.</p>
+                </div>
+            </div>
 
-    <div class="row mt-5 align-items-stretch">
+            <div class="row align-items-stretch">
+                <!-- Contact Info -->
+                <div class="col-lg-4 mb-4">
+                    <div class="contact-info h-100">
+                        <h4 class="mb-4">Contact Details</h4>
+                        <p class="mb-3 d-flex align-items-start">
+                            <i class="fas fa-envelope contact-icon"></i>
+                            <span>poojaelisha03@gmail.com</span>
+                        </p>
+                        <p class="mb-3 d-flex align-items-start">
+                            <i class="fas fa-phone contact-icon"></i>
+                            <span>+91 93455 66180</span>
+                        </p>
+                        <p class="mb-4 d-flex align-items-start">
+                            <i class="fas fa-location-dot contact-icon"></i>
+                            <span>Thiruvallur District, Tamil Nadu, India</span>
+                        </p>
+                        <h6 class="mt-4 mb-3">Follow Me</h6>
+                        <div class="d-flex">
+                            <a href="mailto:poojaelisha03@gmail.com" class="social-icon">
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
 
-      <!-- Contact Info -->
-      <div class="col-lg-4 mb-4">
-        <div class="contact-info h-100">
-          <h4 class="mb-4">Contact Details</h4>
-
-          <p class="mb-3">
-            <i class="fas fa-envelope contact-icon"></i>
-            <span class="ms-2">poojaelisha03@gmail.com</span>
-          </p>
-
-          <p class="mb-3">
-            <i class="fas fa-phone contact-icon"></i>
-            <span class="ms-2">+91 93455 66180</span>
-          </p>
-
-          <p class="mb-4">
-            <i class="fas fa-location-dot contact-icon"></i>
-            <span class="ms-2">Thiruvallur District, Tamil Nadu, India</span>
-          </p>
-
-          <h6 class="mt-4 mb-3">Follow Me</h6>
-
-          <a href="mailto:poojaelisha03@gmail.com" class="social-icon">
-            <i class="fas fa-envelope"></i>
-          </a>
+                <!-- Contact Form -->
+                <div class="col-lg-8 mb-4">
+                    <div class="contact-info h-100">
+                        <h4 class="mb-4">Send Me a Message</h4>
+                        <form id="contactForm">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <input type="text" class="form-control" name="from_name" placeholder="Your Name" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <input type="email" class="form-control" name="reply_to" placeholder="Your Email" required>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" class="form-control" name="subject" placeholder="Subject" required>
+                            </div>
+                            <div class="mb-3">
+                                <textarea class="form-control" rows="5" name="message" placeholder="Message" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-lg px-5">
+                                Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-
-      <!-- Contact Form -->
-      <div class="col-lg-8 mb-4">
-        <div class="contact-info h-100">
-          <h4 class="mb-4">Send Me a Message</h4>
-
-          <form id="contactForm">
-            <div class="row">
-              <div class="col-md-6 mb-3">
-                <input type="text" class="form-control" name="from_name" placeholder="Your Name" required>
-              </div>
-
-              <div class="col-md-6 mb-3">
-                <input type="email" class="form-control" name="reply_to" placeholder="Your Email" required>
-              </div>
-            </div>
-
-            <div class="mb-3">
-              <input type="text" class="form-control" name="subject" placeholder="Subject" required>
-            </div>
-
-            <div class="mb-3">
-              <textarea class="form-control" rows="5" name="message" placeholder="Message" required></textarea>
-            </div>
-
-            <button type="submit" class="btn btn-primary btn-lg px-5">
-              Send Message
-            </button>
-          </form>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
+    </section>
 
     <!-- Footer -->
-<footer class="text-center">
-  <div class="container">
-    <p>&copy; 2026 Pooja Elisha. All rights reserved.</p>
-    <p>Designed with HTML, CSS, and Bootstrap</p>
-  </div>
-</footer>
+    <footer class="text-center">
+        <div class="container">
+            <p>&copy; 2026 Pooja Elisha. All rights reserved.</p>
+            <p>Designed with HTML, CSS, and Bootstrap</p>
+        </div>
+    </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-
-<script>
-(function(){
-  emailjs.init("8sToeFmy0pcy3XNti");   // your public key
-})();
-</script>
-
-<script>
-document.getElementById("contactForm").addEventListener("submit", function(e){
-  e.preventDefault();
-
-  emailjs.sendForm(
-    "service_ioclgzb",   // service id
-    "template_b65k9pg",           // template id
-    this
-  ).then(function(response){
-    alert("Message sent successfully! 📩");
-    console.log("SUCCESS:", response);
-    document.getElementById("contactForm").reset();
-  }, function(error){
-    alert("Message failed ❌");
-    console.log("FAILED:", error);
-  });
-});
-</script>
-
-
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- EmailJS -->
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    
+    <script>
+        // Initialize EmailJS
+        (function(){
+            emailjs.init("8sToeFmy0pcy3XNti");   // your public key
+        })();
+        
+        // Form submission handler
+        document.getElementById("contactForm").addEventListener("submit", function(e){
+            e.preventDefault();
+            
+            emailjs.sendForm(
+                "service_ioclgzb",   // service id
+                "template_b65k9pg",  // template id
+                this
+            ).then(function(response){
+                alert("Message sent successfully! 📩");
+                console.log("SUCCESS:", response);
+                document.getElementById("contactForm").reset();
+            }, function(error){
+                alert("Message failed ❌");
+                console.log("FAILED:", error);
+            });
+        });
+        
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('navbar-scrolled');
+            } else {
+                navbar.classList.remove('navbar-scrolled');
+            }
+        });
+    </script>
 </body>
 </html>
