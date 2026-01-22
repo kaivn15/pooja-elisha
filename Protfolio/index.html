@@ -345,6 +345,17 @@
         .hero-content {
             order: 1;
         }
+
+        body {
+        padding-top: 100px;   /* pushes content below fixed navbar */
+        }
+
+        /* Mobile navbar brand fix */
+        @media (max-width: 768px) {
+        .navbar-brand {
+            font-size: 1.4rem;
+        }
+        }
     </style>
 </head>
 <body>
@@ -386,7 +397,6 @@
             <div class="row align-items-center">
                 <div class="col-lg-8 col-md-7 hero-content">
                     <h1 class="display-4 fw-bold mb-3">Pooja Elisha</h1>
-                    <h2 class="mb-4">Social Media Marketing Manager & Digital Content Creator</h2>
                     <p class="lead mb-4">Creative professional with expertise in social media strategy, content creation, and digital marketing. Combining technical skills with creative vision to deliver engaging campaigns that drive results.</p>
                     <a href="#contact" class="btn btn-light btn-lg px-4 me-2 mb-2 mb-md-0">Contact Me</a>
                     <a href="#projects" class="btn btn-outline-light btn-lg px-4">View Projects</a>
@@ -762,3 +772,4 @@
     </script>
 </body>
 </html>
+
